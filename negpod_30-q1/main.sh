@@ -35,7 +35,7 @@ delete_student_record() {
 
 #Updating student record by ID
 
-updating_student_record() { 
+update_student_record() { 
     read -p "Enter your Student ID" update_ID
     sed -i "/^$update_ID,/d" "Student_record"
     create_student_record
