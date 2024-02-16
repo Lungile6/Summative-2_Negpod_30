@@ -35,7 +35,9 @@ while true; do
             echo "Enter updated age:"
             read updated_age
 
-            sed -i "s/$update_id.*,/$updated_email, $updated_age, $update_id/" students-list_1023.txt
+            # Use a temporary file to perform the update
+            sed "/^$update_id,/c\\$updated_email, $updated_age, $update_id" students-list_1023.txt > temp.txt
+            mv temp.txt students-list_1023.txt
             ;;
         5)
             exit
@@ -45,4 +47,3 @@ while true; do
             ;;
     esac
 done
-
