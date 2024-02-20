@@ -30,15 +30,16 @@ while true; do
         4)
             echo "Enter student ID to update:"
             read update_id
-            echo "Enter updated email:"
-            read updated_email
-            echo "Enter updated age:"
-            read updated_age
-
-            # Use a temporary file to perform the update
-            sed "/^$update_id,/c\\$updated_email, $updated_age, $update_id" students-list_1023.txt > temp.txt
-            mv temp.txt students-list_1023.txt
-            ;;
+	    if grep -q -E $update_id students-list_1023.txt
+	    then 
+		    echo 'Enter the old value to be update'
+		    read old_value
+		    echo 'Enter the new value'
+		    read new_value
+		    sed -i "/$update_id/s/$old_value/$new_value/" students-list_1023.txt
+	    else
+		    echo 'student id not found!!!'
+	    fi;;
         5)
             exit
             ;;
